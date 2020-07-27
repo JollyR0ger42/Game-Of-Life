@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Board from '../Board/Board';
+import gameIteration from './gameIteration';
 
 
 function Game(props) {
