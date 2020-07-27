@@ -4,8 +4,8 @@ import './Board.css'
 
 
 function Board(props) {
-  function renderCell(isActive){
-    return <Cell isActive={isActive} />
+  function renderCell(isActive, onClick){
+    return <Cell isActive={isActive} onClick={onClick}/>
   }
 
   function generateGrid(gameGrid){
@@ -15,7 +15,7 @@ function Board(props) {
     for(let i = 0; i < rows; i++){
       let cellList = [];
       for(let k = 0; k < columns; k++){
-        cellList.push(<td key={k}>{renderCell(gameGrid[i][k])}</td>)
+        cellList.push(<td key={k}>{renderCell(gameGrid[i][k], () => props.handleClick(i, k))}</td>)
       }
       grid.push(<tr key={i}>{cellList}</tr>)
     }

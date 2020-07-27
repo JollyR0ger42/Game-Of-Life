@@ -7,7 +7,12 @@ function Cell(props){
   if(props.isActive)
     classList += " active"
 
-  return(<button className={classList}></button>)
+  return(
+    <button 
+      className={classList} 
+      onClick={props.onClick}>
+    </button>
+  )
 }
 
 export default Cell;
