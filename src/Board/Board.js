@@ -4,12 +4,8 @@ import './Board.css'
 
 
 function Board(props) {
-  function generateRow(columns){
-    let listCells = [];
-    for(let i = 0; i < columns; i++ ){
-      listCells.push(<td key={i}><Cell /></td>)
-    }
-    return listCells
+  function renderCell(isActive){
+    return <Cell isActive={isActive} />
   }
 
   function generateGrid(gameGrid){
@@ -17,7 +13,11 @@ function Board(props) {
     const columns = gameGrid[0].length;
     let grid = [];
     for(let i = 0; i < rows; i++){
-      grid.push(<tr key={i}>{generateRow(columns)}</tr>)
+      let cellList = [];
+      for(let k = 0; k < columns; k++){
+        cellList.push(<td key={k}>{renderCell(gameGrid[i][k])}</td>)
+      }
+      grid.push(<tr key={i}>{cellList}</tr>)
     }
     return grid
   }
