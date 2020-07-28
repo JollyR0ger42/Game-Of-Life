@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Board from '../Board/Board';
+
 import gameIteration from './gameIteration';
+import {cloneDeep} from  'lodash';
 
 
 function Game(props) {
@@ -14,14 +16,14 @@ function Game(props) {
     if(intervalID){
       clearInterval(intervalID)
       setIntervalID(undefined)
-    } else{
-      const interval = setInterval(() => console.log('start'), 500);
+    } else {
+      let interval = setInterval(() => setGameGrid(prevGrid => gameIteration(prevGrid)), 100);
       setIntervalID(interval)
     }
   }
 
   function handleClick(row, column) {
-    let grid = gameGrid.slice();
+    let grid = cloneDeep(gameGrid);
     grid[row][column] = grid[row][column] ? 0 : 1
     setGameGrid(grid)
   }
