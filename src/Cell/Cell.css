@@ -1,6 +1,7 @@
 .square{
-  width: 20px;
-  height: 20px;
+  width: 8px;
+  height: 8px;
+  border: 0.1px black solid;
 }
 .active{
   background-color: black;

@@ -8,10 +8,10 @@ function Cell(props){
     classList += " active"
 
   return(
-    <button 
+    <p 
       className={classList} 
-      onClick={props.onClick}>
-    </button>
+      onMouseOver={props.handleMouseOver}>
+    </p>
   )
 }
 
