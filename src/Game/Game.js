@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Board from '../Board/Board';
+import './Game.css';
 
 import gameIteration from './gameIteration';
 import {cloneDeep} from  'lodash';
@@ -29,12 +30,17 @@ function Game(props) {
   }
 
   return (
-    <div>
+    <div className="flex-row">
       <Board 
         gameGrid={gameGrid} 
         setCellState={setCellState}
       />
-      <button onClick={handleStart}>{intervalID ? 'Stop' : 'Start'}</button>
+      <div className="flex-column bg-almond">
+        <button 
+          className="align-center"
+          onClick={handleStart}>{intervalID ? 'Stop' : 'Start'}
+        </button>
+      </div>
     </div>
   )
 }
