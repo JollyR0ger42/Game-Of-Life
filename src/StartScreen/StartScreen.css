@@ -1,0 +1,21 @@
+.flex-column{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+.justify-center{
+  justify-content: center;
+}
+h1{
+  color: aliceblue;
+  font-size: 30px;
+  margin-bottom: 10px !important;
+}
+h4{
+  color: aliceblue;
+  font-size: 10px;
+}
+.bg{
+  background-color: cadetblue;
+}

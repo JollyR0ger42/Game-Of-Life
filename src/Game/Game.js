@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Board from '../Board/Board';
+import {useParams} from 'react-router-dom';
 import './Game.css';
 
 import gameIteration from './gameIteration';
@@ -7,9 +8,11 @@ import {cloneDeep} from  'lodash';
 
 
 function Game(props) {
+  const {rows, columns} = useParams();
+  console.log(rows, columns)
   // array of array with columns * rows dimension
   let [gameGrid, setGameGrid] = useState(Array.from(
-    {length: props.rows}, () => new Array(props.columns).fill(0))
+    {length: parseInt(rows)}, () => new Array(parseInt(columns)).fill(0))
   );
   let [intervalID, setIntervalID] = useState();
 
@@ -35,7 +38,7 @@ function Game(props) {
         gameGrid={gameGrid} 
         setCellState={setCellState}
       />
-      <div className="flex-column bg-almond">
+      <div className="flex-column">
         <button 
           className="align-center"
           onClick={handleStart}>{intervalID ? 'Stop' : 'Start'}
