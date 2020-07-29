@@ -30,11 +30,11 @@ function Game(props) {
 
   return (
     <div>
-      <button onClick={handleStart}>{intervalID ? 'Stop' : 'Start'}</button>
       <Board 
         gameGrid={gameGrid} 
         setCellState={setCellState}
       />
+      <button onClick={handleStart}>{intervalID ? 'Stop' : 'Start'}</button>
     </div>
   )
 }
