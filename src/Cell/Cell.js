@@ -10,7 +10,9 @@ function Cell(props){
   return(
     <p 
       className={classList} 
-      onMouseOver={props.handleMouseOver}>
+      onMouseOver={props.handleMouseOver}
+      onClick={props.handleClick}
+    >
     </p>
   )
 }

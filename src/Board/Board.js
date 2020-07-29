@@ -4,8 +4,8 @@ import './Board.css'
 
 
 function Board(props) {
-  function renderCell(isActive, handleMouseOver){
-    return <Cell isActive={isActive} handleMouseOver={handleMouseOver}/>
+  function renderCell(isActive, handleMouseOver, handleClick){
+    return <Cell isActive={isActive} handleMouseOver={handleMouseOver} handleClick={handleClick}/>
   }
 
   function generateGrid(gameGrid){
@@ -17,7 +17,11 @@ function Board(props) {
       for(let k = 0; k < columns; k++){
         cellList.push(
           <td key={k}>
-            {renderCell(gameGrid[i][k], () => props.handleMouseOver(i, k))}
+            {renderCell(
+              gameGrid[i][k], 
+              () => props.handleMouseOver(i, k), 
+              () => props.handleClick(i, k)
+            )}
           </td>)
       }
       grid.push(<tr key={i}>{cellList}</tr>)

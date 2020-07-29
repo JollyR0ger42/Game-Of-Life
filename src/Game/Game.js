@@ -23,12 +23,20 @@ function Game(props) {
     }
   }
 
+  function toggleCell(row, column){
+    let grid = cloneDeep(gameGrid);
+    grid[row][column] = grid[row][column] ? 0 : 1
+    setGameGrid(grid)
+  }
+
   function handleMouseOver(row, column) {
     if(isMousePressed){
-      let grid = cloneDeep(gameGrid);
-      grid[row][column] = grid[row][column] ? 0 : 1
-      setGameGrid(grid)
+      toggleCell(row, column)
     }
+  }
+
+  function handleClick(row, column){
+    toggleCell(row, column)
   }
 
   return (
@@ -38,6 +46,7 @@ function Game(props) {
         setMouseState={setMouseState}
         gameGrid={gameGrid} 
         handleMouseOver={handleMouseOver} 
+        handleClick={handleClick}
       />
     </div>
   )
