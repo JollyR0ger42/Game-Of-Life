@@ -22,9 +22,9 @@ function Game(props) {
     }
   }
 
-  function toggleCell(row, column){
+  function setCellState(row, column, state){
     let grid = cloneDeep(gameGrid);
-    grid[row][column] = grid[row][column] ? 0 : 1
+    grid[row][column] = state
     setGameGrid(grid)
   }
 
@@ -33,7 +33,7 @@ function Game(props) {
       <button onClick={handleStart}>{intervalID ? 'Stop' : 'Start'}</button>
       <Board 
         gameGrid={gameGrid} 
-        toggleCell={toggleCell}
+        setCellState={setCellState}
       />
     </div>
   )

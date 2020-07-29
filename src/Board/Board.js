@@ -5,6 +5,7 @@ import './Board.css'
 
 function Board(props) {
   let [isMousePressed, setMouseState] = useState(false);
+  let [cellStateTo, setCellStateTo] = useState(1);
 
   function renderCell(isActive, id, handleMouseOver){
     return (
@@ -39,28 +40,33 @@ function Board(props) {
 
   function handleMouseDown(event){
     if(event.target.id){
-      let [row, column] = event.target.id.split(':')
-      props.toggleCell(parseInt(row), parseInt(column))
+      let [row, column] = event.target.id.split(':');
+      [row, column] = [parseInt(row), parseInt(column)]
+      if(props.gameGrid[row][column] === 1){
+        setCellStateTo(0)
+      }
+      props.setCellState(row, column, cellStateTo)
     }
     setMouseState(true)
   }
 
-  function handleMouseUp(){
-    setMouseState(false)
-  }
-
   function handleMouseOver(row, column) {
     if(isMousePressed){
-      props.toggleCell(row, column)
+      props.setCellState(row, column, cellStateTo)
     }
   }
 
+  function handleMouseUp(){
+    setCellStateTo(1)
+    setMouseState(false)
+  }
+
   return (
-    <div 
-      onMouseDown={handleMouseDown} 
-      onMouseUp={handleMouseUp}
-    >
-      <table>
+    <div>
+      <table
+        onMouseDown={handleMouseDown} 
+        onMouseUp={handleMouseUp}
+      >
         <tbody>
           {generateGrid(props.gameGrid)}
         </tbody>
