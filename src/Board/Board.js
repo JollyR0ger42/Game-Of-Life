@@ -1,11 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Cell from '../Cell/Cell';
 import './Board.css'
 
 
 function Board(props) {
-  function renderCell(isActive, handleMouseOver, handleClick){
-    return <Cell isActive={isActive} handleMouseOver={handleMouseOver} handleClick={handleClick}/>
+  let [isMousePressed, setMouseState] = useState(false);
+  let [cellStateTo, setCellStateTo] = useState(1);
+
+  function renderCell(isActive, id, handleMouseOver){
+    return (
+      <Cell 
+        isActive={isActive} 
+        id={id} 
+        handleMouseOver={handleMouseOver} 
+      />
+    )
   }
 
   function generateGrid(gameGrid){
@@ -19,8 +28,8 @@ function Board(props) {
           <td key={k}>
             {renderCell(
               gameGrid[i][k], 
-              () => props.handleMouseOver(i, k), 
-              () => props.handleClick(i, k)
+              `${i}:${k}`,
+              () => handleMouseOver(i, k), 
             )}
           </td>)
       }
@@ -29,17 +38,35 @@ function Board(props) {
     return grid
   }
 
-  function handleMouseDown(){
-    props.setMouseState(true)
+  function handleMouseDown(event){
+    if(event.target.id){
+      let [row, column] = event.target.id.split(':');
+      [row, column] = [parseInt(row), parseInt(column)]
+      if(props.gameGrid[row][column] === 1){
+        setCellStateTo(0)
+      }
+      props.setCellState(row, column, cellStateTo)
+    }
+    setMouseState(true)
+  }
+
+  function handleMouseOver(row, column) {
+    if(isMousePressed){
+      props.setCellState(row, column, cellStateTo)
+    }
   }
 
   function handleMouseUp(){
-    props.setMouseState(false)
+    setCellStateTo(1)
+    setMouseState(false)
   }
 
   return (
-    <div onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-      <table>
+    <div>
+      <table
+        onMouseDown={handleMouseDown} 
+        onMouseUp={handleMouseUp}
+      >
         <tbody>
           {generateGrid(props.gameGrid)}
         </tbody>

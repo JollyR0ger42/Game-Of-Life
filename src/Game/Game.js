@@ -11,7 +11,6 @@ function Game(props) {
     {length: props.rows}, () => new Array(props.columns).fill(0))
   );
   let [intervalID, setIntervalID] = useState();
-  let [isMousePressed, setMouseState] = useState(false);
 
   function handleStart(){
     if(intervalID){
@@ -23,30 +22,18 @@ function Game(props) {
     }
   }
 
-  function toggleCell(row, column){
+  function setCellState(row, column, state){
     let grid = cloneDeep(gameGrid);
-    grid[row][column] = grid[row][column] ? 0 : 1
+    grid[row][column] = state
     setGameGrid(grid)
-  }
-
-  function handleMouseOver(row, column) {
-    if(isMousePressed){
-      toggleCell(row, column)
-    }
-  }
-
-  function handleClick(row, column){
-    toggleCell(row, column)
   }
 
   return (
     <div>
       <button onClick={handleStart}>{intervalID ? 'Stop' : 'Start'}</button>
       <Board 
-        setMouseState={setMouseState}
         gameGrid={gameGrid} 
-        handleMouseOver={handleMouseOver} 
-        handleClick={handleClick}
+        setCellState={setCellState}
       />
     </div>
   )
