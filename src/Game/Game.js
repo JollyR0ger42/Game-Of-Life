@@ -33,17 +33,14 @@ function Game(props) {
   }
 
   return (
-    <div className="flex-row">
+    <div className="flex-column">
+      <button 
+        onClick={handleStart}>{intervalID ? 'Stop' : 'Start'}
+      </button>
       <Board 
         gameGrid={gameGrid} 
         setCellState={setCellState}
       />
-      <div className="flex-column">
-        <button 
-          className="align-center"
-          onClick={handleStart}>{intervalID ? 'Stop' : 'Start'}
-        </button>
-      </div>
     </div>
   )
 }
