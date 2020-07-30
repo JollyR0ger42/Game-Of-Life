@@ -9,11 +9,9 @@ import {cloneDeep} from  'lodash';
 
 function Game(props) {
   const {rows, columns} = useParams();
-  console.log(rows, columns)
+  const emptyGrid = Array.from({length: parseInt(rows)}, () => new Array(parseInt(columns)).fill(0))
   // array of array with columns * rows dimension
-  let [gameGrid, setGameGrid] = useState(Array.from(
-    {length: parseInt(rows)}, () => new Array(parseInt(columns)).fill(0))
-  );
+  let [gameGrid, setGameGrid] = useState(emptyGrid);
   let [intervalID, setIntervalID] = useState();
 
   function handleStart(){
@@ -34,9 +32,14 @@ function Game(props) {
 
   return (
     <div className="flex-column">
-      <button 
-        onClick={handleStart}>{intervalID ? 'Stop' : 'Start'}
-      </button>
+      <div>
+        <button 
+          onClick={handleStart}>{intervalID ? 'Stop' : 'Start'}
+        </button>
+        <button 
+          onClick={() => setGameGrid(emptyGrid)}>Clear
+        </button>
+      </div>
       <Board 
         gameGrid={gameGrid} 
         setCellState={setCellState}
