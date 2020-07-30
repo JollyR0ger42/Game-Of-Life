@@ -19,8 +19,10 @@ function StartScreen() {
       <h1>Conway's Game of Life</h1>
       <h4>Set the field size</h4>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input name="rows" defaultValue="35" ref={register }/>
-        <input name="columns" defaultValue="35" ref={register}/>
+        <label>Rows:</label>
+        <input type="number" name="rows" defaultValue="35" ref={register }/>
+        <label>Columns:</label>
+        <input type="number" name="columns" defaultValue="35" ref={register}/>
         <button>Start</button>
       </form>
     </div>

@@ -10,11 +10,15 @@
 h1{
   color: aliceblue;
   font-size: 30px;
+  margin-bottom: 15px !important;
+}
+h4, label{
+  color: aliceblue;
+  font-size: 15px;
   margin-bottom: 10px !important;
 }
-h4{
-  color: aliceblue;
-  font-size: 10px;
+input{
+  width: 75px;
 }
 .bg{
   background-color: cadetblue;
