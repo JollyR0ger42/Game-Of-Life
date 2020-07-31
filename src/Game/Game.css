@@ -3,9 +3,6 @@
   flex-direction: column;
   flex-grow: 1;
 }
-h1{
-  color: black !important;
-}
 .fixed{
   position: fixed;
   left: 2px;
