@@ -7,13 +7,6 @@ function Board(props) {
   let [isMousePressed, setMouseState] = useState(false);
   let [cellStateTo, setCellStateTo] = useState(1);
 
-  window.addEventListener('touchmove', event => {
-    if(event.touches.length === 1){
-      event.preventDefault();
-      event.stopImmediatePropagation();
-    }
-  }, {passive: false})
-
   function renderCell(isActive, id, handleMouseOver, handleTouchMove){
     return (
       <Cell 
@@ -69,16 +62,16 @@ function Board(props) {
   }
 
   function handleTouchStart(event){
-    if(event.touches.length === 1){
+    if(props.isEditMode){
       handleMouseDown(event)
     }
   }
   
   function handleTouchMove(event){
-    if(event.touches.length === 1){
+    if(props.isEditMode){
       const targetElement = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY)
-      const [row, column] = targetElement.id.split(':').map(x => parseInt(x));
-      if(row && column){
+      if(targetElement?.id){
+        const [row, column] = targetElement.id.split(':').map(x => parseInt(x));
         props.setCellState(row, column, cellStateTo)
       }
     }
