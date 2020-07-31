@@ -11,5 +11,4 @@ h1{
   left: 2px;
   top: 2px; 
   -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
