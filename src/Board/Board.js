@@ -7,6 +7,11 @@ function Board(props) {
   let [isMousePressed, setMouseState] = useState(false);
   let [cellStateTo, setCellStateTo] = useState(1);
 
+  window.addEventListener('touchmove', event => {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }, {passive: false})
+
   function renderCell(isActive, id, handleMouseOver, handleTouchMove){
     return (
       <Cell 
