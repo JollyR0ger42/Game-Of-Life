@@ -8,8 +8,10 @@ function Board(props) {
   let [cellStateTo, setCellStateTo] = useState(1);
 
   window.addEventListener('touchmove', event => {
-    event.preventDefault();
-    event.stopImmediatePropagation();
+    if(event.touches.length === 1){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
   }, {passive: false})
 
   function renderCell(isActive, id, handleMouseOver, handleTouchMove){
@@ -67,10 +69,12 @@ function Board(props) {
   }
   
   function handleTouchMove(event){
-    const targetElement = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY)
-    const [row, column] = targetElement.id.split(':').map(x => parseInt(x));
-    if(row && column){
-      props.setCellState(row, column, cellStateTo)
+    if(event.touches.length === 1){
+      const targetElement = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY)
+      const [row, column] = targetElement.id.split(':').map(x => parseInt(x));
+      if(row && column){
+        props.setCellState(row, column, cellStateTo)
+      }
     }
   }
 
