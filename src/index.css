@@ -33,6 +33,7 @@ ol, ul {
   list-style: none;
 }
 *{
+  transform: none;
   font-family: Arial, Helvetica, sans-serif;
   user-select: none;
   -moz-user-select: none;
