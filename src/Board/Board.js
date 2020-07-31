@@ -67,6 +67,12 @@ function Board(props) {
     setCellStateTo(1)
     setMouseState(false)
   }
+
+  function handleTouchStart(event){
+    if(event.touches.length === 1){
+      handleMouseDown(event)
+    }
+  }
   
   function handleTouchMove(event){
     if(event.touches.length === 1){
@@ -84,7 +90,7 @@ function Board(props) {
         onMouseDown={handleMouseDown} 
         onMouseUp={handleMouseUp}
         onTouchMove={handleTouchMove}
-        onTouchStart={handleMouseDown}
+        onTouchStart={handleTouchStart}
         onTouchEnd={handleMouseUp}
       >
         <tbody>
