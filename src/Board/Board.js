@@ -7,12 +7,13 @@ function Board(props) {
   let [isMousePressed, setMouseState] = useState(false);
   let [cellStateTo, setCellStateTo] = useState(1);
 
-  function renderCell(isActive, id, handleMouseOver){
+  function renderCell(isActive, id, handleMouseOver, handleTouchMove){
     return (
       <Cell 
         isActive={isActive} 
         id={id} 
         handleMouseOver={handleMouseOver} 
+        handleTouchMove={handleTouchMove}
       />
     )
   }
@@ -29,7 +30,7 @@ function Board(props) {
             {renderCell(
               gameGrid[i][k], 
               `${i}:${k}`,
-              () => handleMouseOver(i, k), 
+              () => handleMouseOver(i, k),
             )}
           </td>)
       }
@@ -40,8 +41,7 @@ function Board(props) {
 
   function handleMouseDown(event){
     if(event.target.id){
-      let [row, column] = event.target.id.split(':');
-      [row, column] = [parseInt(row), parseInt(column)]
+      const [row, column] = event.target.id.split(':').map(x => parseInt(x));
       if(props.gameGrid[row][column] === 1){
         setCellStateTo(0)
       }
@@ -49,16 +49,24 @@ function Board(props) {
     }
     setMouseState(true)
   }
-
+  
   function handleMouseOver(row, column) {
     if(isMousePressed){
       props.setCellState(row, column, cellStateTo)
     }
   }
-
+  
   function handleMouseUp(){
     setCellStateTo(1)
     setMouseState(false)
+  }
+  
+  function handleTouchMove(event){
+    const targetElement = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY)
+    const [row, column] = targetElement.id.split(':').map(x => parseInt(x));
+    if(row && column){
+      props.setCellState(row, column, cellStateTo)
+    }
   }
 
   return (
@@ -66,6 +74,9 @@ function Board(props) {
       <table
         onMouseDown={handleMouseDown} 
         onMouseUp={handleMouseUp}
+        onTouchMove={handleTouchMove}
+        onTouchStart={handleMouseDown}
+        onTouchEnd={handleMouseUp}
       >
         <tbody>
           {generateGrid(props.gameGrid)}
