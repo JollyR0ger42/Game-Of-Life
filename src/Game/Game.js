@@ -6,6 +6,10 @@ import './Game.css';
 import gameIteration from './gameIteration';
 import {cloneDeep} from  'lodash';
 
+function preventDefault(event) {
+  event.preventDefault()
+  event.stopImmediatePropagation()
+}
 
 function Game(props) {
   const {rows, columns} = useParams();
@@ -15,19 +19,11 @@ function Game(props) {
   let [intervalID, setIntervalID] = useState();
   let [isTouchDevice, setTouchStatus] = useState();
   let [editMode, setEditMode] = useState(false);
-  
-  function preventDefault(event) {
-    event.preventDefault()
-    event.stopImmediatePropagation()
-  }
 
   useEffect(() => {
-    console.log('efect used')
     if(editMode){
-      console.log('add')
       window.addEventListener('touchmove', preventDefault, {passive: false, capture: false})
     } else {
-      console.log('remove')
       window.removeEventListener('touchmove', preventDefault, {passive: false, capture: false})
     }
   }, [editMode])
