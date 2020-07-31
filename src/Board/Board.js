@@ -42,10 +42,12 @@ function Board(props) {
   function handleMouseDown(event){
     if(event.target.id){
       const [row, column] = event.target.id.split(':').map(x => parseInt(x));
+      let firstCellState = 1;
       if(props.gameGrid[row][column] === 1){
         setCellStateTo(0)
+        firstCellState = 0
       }
-      props.setCellState(row, column, cellStateTo)
+      props.setCellState(row, column, firstCellState)
     }
     setMouseState(true)
   }
